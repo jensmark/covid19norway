@@ -8,7 +8,7 @@ SOURCE_MAP = {
     'allCases': 'https://www.vg.no/spesial/2020/corona-viruset/data/norway-allCases/',
     'casesByCounty': 'https://redutv-api.vg.no/corona/v1/sheets/norway-table-overview/?region=county',
     'casesByMunicipality': 'https://redutv-api.vg.no/corona/v1/sheets/norway-table-overview/?region=municipality',
-    'casesByAge': 'https://redutv-api.vg.no/corona/v1/sheets/norway-age-data',
+    # 'casesByAge': 'https://redutv-api.vg.no/corona/v1/sheets/norway-age-data',
     'norwayData': 'https://redutv-api.vg.no/corona/v1/sheets/norway-region-data/'
 }
 
@@ -65,4 +65,14 @@ def __csv_mapper(name: str):
         return pd.merge(confimed, death).to_csv(line_terminator='\n', index=False)
 
     maps = {k.split('_')[-1]: v for k, v in locals().items() if k.startswith('map_')}
-    return maps[name] if name in maps else lambda x: ''
+
+    def map_data(name):
+        def mapper(value):
+            mapper_func = maps[name]
+            try:
+                return mapper_func(value)
+            except Exception as e:
+                return str(e)
+        return mapper
+
+    return map_data(name) if name in maps else lambda x: ''
