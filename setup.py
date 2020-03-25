@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='covid19norway',
-    version='1.0.4',
+    version='1.0.5',
     description='',
     long_description=open('README.md').read().strip(),
     author='Jens Markussen',

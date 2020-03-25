@@ -9,6 +9,7 @@ LISTS = [
     'Bil',
     'Bygg og anlegg',
     'Finansiering og forsikring',
+    'Hotell og reiseliv',
     'Industri',
     'Informasjon og kommunikasjon',
     'Kultur, underholdning og fritid',
